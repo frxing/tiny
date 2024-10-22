@@ -6,7 +6,7 @@ import {
 } from 'fs'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import log from './log'
+import log from './log.mts'
 
 // 获取用户的根目录
 export const userHomeDir = homedir();

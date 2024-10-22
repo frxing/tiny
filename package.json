@@ -1,11 +1,10 @@
 {
   "name": "@frxing/tiny",
   "version": "1.0.5",
-  "type": "module",
   "bin": {
-    "tiny": "./bin/ty.min.cjs",
-    "ty": "./bin/ty.min.cjs",
-    "ti": "./bin/ty.min.cjs"
+    "tiny": "./bin/ty.min.js",
+    "ty": "./bin/ty.min.js",
+    "ti": "./bin/ty.min.js"
   },
   "files": [
     "bin"

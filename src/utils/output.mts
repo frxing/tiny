@@ -3,7 +3,7 @@ import {
   rmSync,
   mkdirSync
 } from 'fs'
-import { getConfig } from '.';
+import { getConfig } from './index.mts';
 
 /**
  * @desc: 递归判断路径

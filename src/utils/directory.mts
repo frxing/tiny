@@ -1,10 +1,10 @@
 import { statSync, readdirSync } from 'fs'
 import { resolve } from 'path'
 import { exit } from 'process'
-import getOutputPath from './output'
-import { isImage } from './index'
-import startCompress from './tiny'
-import log from './log'
+import getOutputPath from './output.mts'
+import { isImage } from './index.mts'
+import startCompress from './tiny.mts'
+import log from './log.mts'
 
 const compressDir =(dirPath?: string) => {
   const dirAllPath = resolve(

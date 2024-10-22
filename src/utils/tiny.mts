@@ -4,8 +4,8 @@ import ora from 'ora'
 import {
   getConfig,
   updateKey
-} from '.'
-import log from './log'
+} from './index.mts'
+import log from './log.mts'
 
 const startCompress = ({
   input,

@@ -3,8 +3,8 @@
 import { existsSync, statSync } from 'fs'
 import { resolve } from 'path'
 import { program } from 'commander'
-import compressDir from '@/utils/directory'
-import compressFile from '@/utils/file'
+import compressDir from '@/utils/directory.mjs'
+import compressFile from '@/utils/file.mjs'
 import chalk from 'chalk'
 import {
   userHomeDir,
@@ -12,8 +12,8 @@ import {
   addKey,
   removeKey,
   isImage
-} from './utils'
-import log from './utils/log'
+} from './utils/index.mts'
+import log from './utils/log.mts'
 
 program
   .command('addKey')

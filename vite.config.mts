@@ -30,10 +30,10 @@ export default defineConfig({
   build: {
     outDir: 'bin',// 如果你不需要压缩代码，可以设为 false
     lib: {
-      entry: resolve(__dirname, 'src/main.ts'),
+      entry: resolve(__dirname, 'src/main.mts'),
       formats: ['cjs'],
       fileName: () => {
-        return  `ty.min.cjs`
+        return  `ty.min.js`
       },
     },
     minify: 'terser',

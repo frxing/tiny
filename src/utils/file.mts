@@ -1,10 +1,10 @@
 import { statSync } from 'fs'
 import { resolve, dirname } from 'path'
-import getOutputPath from './output'
+import getOutputPath from './output.mts'
 import { exit } from 'process'
-import startCompress from './tiny'
-import { isImage } from '.'
-import log from './log'
+import startCompress from './tiny.mts'
+import { isImage } from './index.mts'
+import log from './log.mts'
 
 const compressFile = (file: string) => {
   const filePath = resolve(process.cwd(), file);
