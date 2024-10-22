@@ -1,0 +1,14 @@
+lib/
+node_modules/
+public/
+src/
+build/
+
+
+.gitignore
+.npmignore
+index.html
+.package-lock.json
+pnpm-lock.yaml
+tsconfig.json
+vite.config.ts
