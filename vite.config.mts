@@ -1,10 +1,6 @@
 import { defineConfig, Plugin } from 'vite'
-import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import { resolve} from 'path';
-import { vitePluginTypescriptTransform } from 'vite-plugin-typescript-transform';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { nodeExternals } from 'rollup-plugin-node-externals'
-import { node } from '@liuli-util/vite-plugin-node'
 
 function externals(): Plugin {
   return {
