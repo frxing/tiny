@@ -1,8 +1,8 @@
 tiny 命令行压缩
 
-[github地址]([github](https://github.com/frxing/tiny))
+[github地址]([github](https://github.com/frxing/tiny)) : https://github.com/frxing/tiny
 
-[gitee地址]([gitee](https://gitee.com/btoa/tiny))
+[gitee地址]([gitee](https://gitee.com/btoa/tiny)) : https://gitee.com/btoa/tiny
 
 ### 使用方法
 
