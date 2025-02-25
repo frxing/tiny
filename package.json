@@ -1,6 +1,6 @@
 {
   "name": "@frxing/tiny",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "bin": {
     "tiny": "./bin/ty.min.js",
     "ty": "./bin/ty.min.js",
