@@ -6,6 +6,7 @@ import {
   updateKey
 } from './index.mts'
 import log from './log.mts'
+import { generateHash, getLast8Chars } from './hash.mts'
 
 const startCompress = ({
   input,
@@ -21,7 +22,7 @@ const startCompress = ({
   if (!config || config.apiKeys.length === 0 ) {
     return log.warn('请先执行命令 ty addKey ** 添加apiKey,')
   }
-  const {apiKeys, currKeyIndex} = config;
+  const {apiKeys, currKeyIndex, fileName: outputNameType} = config;
   if (+currKeyIndex > apiKeys.length) {
     updateKey()
     return startCompress({input, output, completed, error})
@@ -31,9 +32,16 @@ const startCompress = ({
     tinify.key = apiKeys[+currKeyIndex];
   }
 
-  const fileName = path.basename(input);
-  const spinner = ora(`开始压缩${fileName}`).start();
-  tinify.fromFile(input).toFile(`${output}/${fileName}`, function(err) {
+  const extname = path.extname(input)
+
+  const fileName = path.basename(input, extname);
+  const spinner = ora(`开始压缩${fileName}${extname}`).start();
+  const isOutputHash = outputNameType === 'hash'
+  const isOutputTime = outputNameType === 'time'
+
+  let lastFileName = isOutputHash ? getLast8Chars(generateHash(fileName)) : isOutputTime ? Date.now() : fileName
+
+  tinify.fromFile(input).toFile(`${output}/${lastFileName}${extname}`, function(err) {
     if (err) {
       if (err instanceof tinify.AccountError) {
         updateKey()
@@ -41,12 +49,12 @@ const startCompress = ({
         startCompress({input, output, completed, error})
       } else {
         error && error(err);
-        spinner.fail(`压缩失败${fileName}`);
+        spinner.fail(`压缩失败${fileName}${extname}`);
         log.error(err);
         completed && completed({type: 'error'});
       }
     } else {
-      spinner.succeed(`压缩完成${fileName}`);
+      spinner.succeed(`压缩完成${fileName}${extname} ------> ${lastFileName}${extname}`);
       completed && completed({type: 'success'});
     }
   });

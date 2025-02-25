@@ -49,7 +49,8 @@ export const createConfig = () => {
     "apiKeys": [],
     "outputDir": "dest",
     "currKeyIndex": 0,
-    "clean": true
+    "clean": true,
+    "fileName": 'fileName'
   }), 'utf-8');
 }
 
@@ -67,7 +68,8 @@ export const addKey = (key: string) => {
       "apiKeys": [key],
       "outputDir": "dest",
       "currKeyIndex": 0,
-      "clean": true
+      "clean": true,
+      "fileName": 'fileName'
     }), 'utf-8');
   }
 }
