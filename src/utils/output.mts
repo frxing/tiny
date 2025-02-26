@@ -3,7 +3,7 @@ import {
   rmSync,
   mkdirSync
 } from 'fs'
-import { getConfig } from './index.mts';
+import { getConfig } from './yaml.mts';
 
 /**
  * @desc: 递归判断路径
@@ -24,8 +24,8 @@ function searchDir (path: string, outputDir: string) {
 
 function getOutputPath (path: string) {
   const currentDir = path || process.cwd();
-  const { outputDir, clean } = getConfig() || {}
-  let destPath = currentDir + `/${outputDir}`;
+  const { out_dir, clean } = getConfig() || {}
+  let destPath = currentDir + `/${out_dir || 'tiny'}`;
   // 判断当前目录是否存在，不存在创建后返回目录
   if (!existsSync(destPath)) {
     mkdirSync(destPath)
@@ -36,7 +36,7 @@ function getOutputPath (path: string) {
     rmSync(destPath, { recursive: true, force: true });
     mkdirSync(destPath)
   } else {
-    const output = searchDir(currentDir, outputDir)
+    const output = searchDir(currentDir, out_dir)
     destPath = output
     mkdirSync(output)
   }

@@ -4,9 +4,10 @@ import ora from 'ora'
 import {
   getConfig,
   updateKey
-} from './index.mts'
+} from './yaml.mts'
 import log from './log.mts'
 import { generateHash, getLast8Chars } from './hash.mts'
+import createDateName from './date.mts'
 
 const startCompress = ({
   input,
@@ -19,17 +20,17 @@ const startCompress = ({
   error?: (err: any) => void;
 }) => {
   const config = getConfig();
-  if (!config || config.apiKeys.length === 0 ) {
+  if (config.api_keys.length === 0 ) {
     return log.warn('请先执行命令 ty addKey ** 添加apiKey,')
   }
-  const {apiKeys, currKeyIndex, fileName: outputNameType} = config;
-  if (+currKeyIndex > apiKeys.length) {
+  const {api_keys, key_index, file_name: outputNameType} = config;
+  if (+key_index > api_keys.length) {
     updateKey()
     return startCompress({input, output, completed, error})
   }
-  const currentKey = apiKeys[+currKeyIndex];
+  const currentKey = api_keys[+key_index];
   if (currentKey) {
-    tinify.key = apiKeys[+currKeyIndex];
+    tinify.key = api_keys[+key_index];
   }
 
   const extname = path.extname(input)
@@ -39,7 +40,7 @@ const startCompress = ({
   const isOutputHash = outputNameType === 'hash'
   const isOutputTime = outputNameType === 'time'
 
-  let lastFileName = isOutputHash ? getLast8Chars(generateHash(fileName)) : isOutputTime ? Date.now() : fileName
+  let lastFileName = isOutputHash ? getLast8Chars(generateHash(fileName)) : isOutputTime ? createDateName() : fileName
 
   tinify.fromFile(input).toFile(`${output}/${lastFileName}${extname}`, function(err) {
     if (err) {

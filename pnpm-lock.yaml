@@ -36,6 +36,9 @@ importers:
       vite:
         specifier: ^5.4.8
         version: 5.4.9(@types/node@22.7.8)(terser@5.36.0)
+      yaml:
+        specifier: ^2.7.0
+        version: 2.7.0
 
 packages:
 
@@ -470,6 +473,11 @@ packages:
       terser:
         optional: true
 
+  yaml@2.7.0:
+    resolution: {integrity: sha512-+hSoy/QHluxmC9kCIJyL/uyFmLmc+e5CFR5Wa+bpIhIj85LVb9ZH2nVnqrHoSvKogwODv0ClqZkmiSSaIH5LTA==}
+    engines: {node: '>= 14'}
+    hasBin: true
+
 snapshots:
 
   '@esbuild/aix-ppc64@0.21.5':
@@ -790,3 +798,5 @@ snapshots:
       '@types/node': 22.7.8
       fsevents: 2.3.3
       terser: 5.36.0
+
+  yaml@2.7.0: {}

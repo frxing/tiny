@@ -8,12 +8,14 @@ import compressFile from '@/utils/file.mjs'
 import chalk from 'chalk'
 import {
   userHomeDir,
-  getConfig,
-  addKey,
-  removeKey,
   isImage
 } from './utils/index.mts'
 import log from './utils/log.mts'
+import {
+  getConfig,
+  addKey,
+  removeKey
+} from './utils/yaml.mts'
 
 program
   .command('addKey')
@@ -51,6 +53,7 @@ program
   .option('-v, --version', '版本')
   .action((module, options) => {
     const opts = options.opts()
+
     if (opts.version) {
       log(require('../package.json').version);
       return false
@@ -59,24 +62,23 @@ program
     const oPath = options.args[0]
 
     if (oPath) {
-      const allPath = resolve(process.cwd(), oPath)
-      if (existsSync(allPath)) {
-        const stat = statSync(allPath);
+      const fullPath = resolve(process.cwd(), oPath)
 
-        if (stat.isDirectory()) {
-          compressDir(allPath)
-          return false
-        }
+      if (!existsSync(fullPath)) return log.warn('文件或目录不存在')
 
-        if (stat.isFile()) {
-          if (isImage(allPath)) {
-            compressFile(allPath)
-          } else {
-            log.warn('图片格式不正确');
-          }
+      const stat = statSync(fullPath);
+
+      if (stat.isDirectory()) {
+        compressDir(fullPath)
+        return false
+      }
+
+      if (stat.isFile()) {
+        if (isImage(fullPath)) {
+          compressFile(fullPath)
+        } else {
+          log.warn('图片格式不正确');
         }
-      } else {
-        log.warn('文件或目录不存在')
       }
     } else {
       compressDir()
